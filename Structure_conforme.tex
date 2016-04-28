@@ -1,0 +1,200 @@
+\documentclass[12pt,makeidx]{amsart}
+\usepackage[couleur,draft]{amsdip}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+
+\DeclareMathOperator\Conf{\Cc\text{\tiny onf}}
+
+% BROUILLON
+\usepackage[inline]{showlabels}
+\pagenumbering{gobble}
+\sloppy
+%\pagestyle{empty}
+\definecolor{Grey}{rgb}{0.3,0.3,0.3} 
+\newenvironment{douteux}{%
+  \color{Grey}\tiny
+  \vspace{.3em}
+  \hrule
+  \begin{center}{\small ce qui suit est douteux}\end{center}
+  \hrule
+  \vspace{.4em}
+}{%
+\vspace{.4em}
+\hrule
+  \vspace{.3em}
+}
+
+%% LECTURE SUR ECRAN %%
+%\usepackage[charter]{mathdesign}
+%%%% SAGECLOUD %%%%
+%\geometry{papersize={150mm,243mm},left=2em,right=2em,top=3em,bottom=3em}
+%%%% AUTRE %%%%
+\geometry{a4paper,left=4em,right=4em,top=3em,bottom=3em}
+%% IMPRESSION %%
+
+
+
+
+\begin{document}
+Soit $M$ une variété réelle lisse de dimension $n$. On essayera d'interpréter les structures conformes sur $M$ ou au voisinage d'un point de $M$ en terme de sections (ou des germes) sur $M$ du poussé en avant du $\Oo(2)$ sur $\Pro T_M$.
+Dans le cas hyperkählérien, on peut relier ce fibré projectif à un fibré provenant de l'espace des twisteurs.
+\section{Version riemannienne}
+\subsection{Structure riemannienne} Une \textit{métrique riemannienne} $g$ sur $M$ est la donnée d'une section globale lisse de $\odot^2 T^*M$ telle que
+\begin{itemize}
+\item Pour tout $X \in TM$, $g(X,X)\geq 0$
+\item Pour tout $X \in TM$, $g(X,X) = 0 \Leftrightarrow X=0$
+\end{itemize}
+
+\subsection{Interprétation polynomiale}
+On peut remarquer que pour $V$ espace vectoriel sur un corps $k$, on a~:
+\begin{equation}\label{Bott}
+H^0(\Pro(V),\Oo(p)) = \odot^p V^*
+\end{equation}
+pour tout $p$.
+
+En particulier on a pour tout $x \in M$,
+\begin{equation}\label{sym2enx}
+H^0(\Pro(T_xM), \Oo(2)) = \odot^2T^*_xM
+\end{equation}
+
+\begin{douteux}
+Cet isomorphisme étant naturel, il s'étend en un isomorphisme de fibrés vectoriels
+\begin{equation}
+H^0(\Pro(TM), \Oo(2)) = \odot^2T^*M
+\end{equation}
+Plus précisément~: Si on note $\pi : TM \rightarrow M$ la projection et $\Pro\pi : \Pro(TM) \rightarrow M$ sa version projectivisée, on peut écrire le faisceau $H^0(\Pro(TM),\Oo(2)) = (\Pro\pi)_*\Oo(2)$. Ce faisceau est le faisceau des sections lisses d'un fibré vectoriel $E$ sur $M$ dont la fibre en $x$ est donnée par $H^0(\Pro(T_xM), \Oo(2)) = \odot^2T^*_xM$.
+
+\subsubsection{Interprétation d'une métrique riemannienne}
+Ainsi une métrique riemannienne sur $M$ est une section globale $g$ du faisceau $(\Pro\pi)_* \Oo(2) \rightarrow M$ qui vérifie de plus pour tout $x \in M$, et $X \in T_xM$, 
+$g_x \in H^0(\Pro(T_xM),\Oo(2))$ et $g_x([X]) \in \R^{+*}$...?
+\end{douteux}
+\subsection{Structure conforme}
+Une structure conforme sur $U \subseteq M$ est la donnée d'une classe d'équivalence de structures riemanniennes $[g_0]$ de la forme 
+\begin{equation}
+[g_0] = \ens{e^\phi g_0}{\phi \in \Cc^\infty(U)}
+\end{equation}
+Pour $g_0$ métrique riemannienne sur $U$.
+
+L'ensemble des structures conformes sur $M$ correspond aux sections globale du faisceau $\Conf$
+\[
+\Conf := \Cc^\infty(\odot^2 T^*M) / \Cc^\infty
+\]
+où le quotient est relatif à l'action $(\phi,g_0) \mapsto e^\phi g_0$.
+
+\section{Version complexifiée}
+\subsection{Structure pseudo-riemannienne} Une \textit{métrique pseudo-riemannienne} $g$ sur $M$ est la donnée d'une section globale de $\odot^2 T^*M$ telle que
+\begin{equation}\label{nondegenerescence}
+\forall X \in TM \setminus \{0\}, \exists Y \in TM\ , \ g(X,Y) \neq 0
+\end{equation}
+
+\begin{douteux}
+On definit son indice comme la dimension de la quadrique projective (lisse) réelle d'équation $g(X,X)=0$.
+
+On peut repérer les métriques riemanniennes comme etant celles d'indice $0$ et positives.
+\end{douteux}
+
+Cela revient à se donner une section globale \textit{réelle} non dégénérée de $\odot_\C^2 T^*M^\C$ où $TM^\C = TM \otimes \C$. En effet on étend une métrique pseudo-riemannienne $g$ à $TM^\C$ par
+\[
+g(X \otimes z, Y \otimes w) = zw g(X,Y)
+\]
+Elle satisfait la condition de non dégénérescence \eqref{nondegenerescence} dans sa version complexifiée ($X,Y \in TM^\C$) et est réelle au sens suivant~:
+\begin{equation}\label{reel}
+\forall X,Y \in TM^\C\; ,\quad \overline{g(X,Y)} = g\left(\overline{X},\overline{Y}\right)
+\end{equation}
+
+Réciproquement, on peut restreindre la donnée d'une section non-dégénérée réelle $g$ de $\odot^2 T^*M^\C$ aux vecteurs de la forme $X \otimes 1, Y \otimes 1$. Un calcul rapide permet de vérifier que la condition de non dégénérescence réelle \eqref{nondegenerescence} est satisfaite.
+
+\subsection{Structure pseudo-riemannienne conforme}
+Dans notre cas, une \textit{structure pseudo-riemannienne conforme} (PsRC) sera la donnée d'une classe d'équivalence de structures pseudo-riemanniennes (vues comme sections de $\odot^2 T^*M^\C$) modulo multiplication par les fonctions $\lambda \in \Cc^\infty(M,\C^\times)$. Une telle fonction est une section $\Cc^\infty$ du fibré constant $\C^\times$ et donc une structure PsRC est la donnée d'une section globale de
+\[
+\left(\odot^2T^* M^\C\right) / \C^\times \cong \Pro \left(\odot^2T^* M^\C\right)
+\]
+Reste à traduire la condition de non-dégénérescence et le caractère réel.
+
+\section{Le cas hyperkählérien}
+Dans le cas $M$ variété hyperkählérienne, on a~: $T_x M^\C \cong H^0(L,N)$ où $L =L_x \subseteq Z$ est la droite twistorielle associée à $x$ et $N = N_{L_x/Z}$. 
+
+Ainsi l'équation \eqref{sym2enx} devient
+\[
+\odot^2T^*_xM^\C = H^0(\Pro(T_xM^\C), \Oo(2)) = H^0(\Pro(H^0(L,N)), \Oo(2))
+\]
+
+Et on a le diagramme
+\begin{center}
+\begin{tikzpicture}
+\matrix (m) [matrix of math nodes, row sep=2em,
+column sep=2.5em, text height=1.5ex, text depth=0.25ex]
+{ N & \Oo(2) \\
+  L & \Pro H^0(L,N) \\ };
+\path[->, font=\scriptsize]%
+%(m-1-1) edge node[auto] {$•$} (m-1-2)
+(m-1-1) edge node[auto] {} (m-2-1)%
+%(m-2-1) edge node[auto] {$\subset$} (m-2-2)
+(m-1-2) edge node[auto] {} (m-2-2);
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Bilan} Une métrique $g_x$ en un point $x \in M$ donne un élément de $\odot^2T^*_x M^\C$ et donc une section globale de $\Oo(2)$ au dessus de $\Pro H^0(L,N)$.
+Cette section est "réelle" (pour une bonne structure réelle sur cet espace de sections) et satisfait une condition qui doit correspondre à la non-dégénérescence de $g_x$ (en particulier, cette section ne s'annule pas !).
+
+Une classe conforme de métriques riemanniennes en $x$ produit donc un élément de 
+\[
+\Pro H^0(\Pro H^0(L,N),\Oo(2))
+\]
+\begin{center}
+\begin{tikzpicture}
+\matrix (m) [matrix of math nodes, row sep=2em,
+column sep=2.5em, text height=1.5ex, text depth=0.25ex]
+{ N & \Oo(2) & \\
+  L & \Pro H^0(L,N) & \Pro H^0(\Pro H^0(L,N),\Oo(2)) \\ };
+\path[->, font=\scriptsize]%
+%(m-1-1) edge node[auto] {$•$} (m-1-2)
+(m-1-1) edge node[auto] {} (m-2-1)%
+%(m-2-1) edge node[auto] {$\subset$} (m-2-2)
+%(m-2-2) edge node[auto] {$\subset$} (m-2-3)
+%(m-1-2) edge node[auto] {} (m-1-3)
+%(m-1-3) edge node[auto] {} (m-2-3)
+(m-1-2) edge node[auto] {} (m-2-2);
+\end{tikzpicture}
+\end{center}
+
+Reste à comprendre comment ce diagramme varie quand $x$ varie. On peut noter que 
+\[
+H^0(L,N) = \left( \nu_*\mu^* T_f\right)_x
+\]
+Ainsi les faisceaux $\Oo_{M^\C}(TM^\C)$ et $\nu_*\Oo_W(\mu^* T_f)$ sont des fibrés vectoriels sur $M^\C$ et sont isomorphes fibres à fibres. Ils doivent donc différer par un fibré en droite. Par suite, les fibrés projectifs $\Pro TM^\C$ et $\Pro(\nu_*\mu^* T_f)$ sont isomorphes.
+
+Il peut être intéressant de considérer le fibré en $\Pro^{2n-1}$ sur $M$ (ou plutôt $M^\C$) défini par $\Pro \left(\nu_*\mu^* T_f\right)$. Une PsRC est une section globale du poussé-en-avant sur $M$ du faisceau $\Oo(2)$ sur $\Pro \left(\nu_*\mu^* T_f\right)$.
+
+\subsection*{Enoncé}Soit $(M,I_0,g_0)$ une  variété hyperkählérienne. On notera $Z$ son espace des twisteurs, $W$ l'espace tautologique de la fibration twistorielle, $M^\C$ l'espace des sections de $f : Z \to \Pro^1$ et \[M^\C \underset{\nu}{\longleftarrow} W \underset{\mu}{\longrightarrow} Z\] la correspondance des twisteurs.
+Enfin, on notera $i : M \hookrightarrow M^\C$ l'injection en tant que sous-variété lisse.
+
+{\itshape Soit $[g]$ une classe conforme de métriques riemanniennes sur $M$.
+Alors $[g]$ définit un élément de 
+\[
+\Gamma_{\Cc^\infty}\left(\ M \ ,\ \Pro\left( p_*\Oo(2)\right) \phantom{\demi}\right)
+\]
+où $p : \Pro(i^{-1}\nu_*\mu^*T_f) \rightarrow M$.
+De plus cette section satisfait les conditions suivantes
+\begin{itemize}
+\item Non-dégénérée ...
+\item Réelle ...
+\item Positive (signature $(n,0)$)...
+\end{itemize}
+}
+
+\section{Autre point de vue}
+
+
+
+\section*{Références et autres}
+\begin{itemize}
+\item cf 4.pdf section III pour le lien direct entre $TM^\C$ et $\nu_*\mu^*T_f$.
+\item Lire [Besse 1.J p.58] Conformal changes in Riemannian metrics
+\item Lire [Besse, thm 1.174 p.62] pour savoir comment varie les grandeurs Riemanniennes $\nabla, W, R\cdots$ quand $g$ varie dans la direction $h \in \odot^2T^*M$
+\end{itemize}
+
+\end{document}
+%sagemathcloud={"lang":"francais"}
